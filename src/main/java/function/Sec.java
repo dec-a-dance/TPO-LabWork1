@@ -1,4 +1,4 @@
-package main.java.lab1_tpo.function;
+package function;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
