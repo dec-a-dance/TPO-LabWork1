@@ -1,0 +1,57 @@
+package test.java.function;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import static java.lang.Math.PI;
+import static java.lang.Math.cos;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+
+public class SecTest {
+    private function.Sec sec;
+
+
+    @BeforeEach
+    void init() {
+        sec = new function.Sec();
+    }
+
+    @ParameterizedTest(name = "{index}. Test sec({0}) on null ")
+    @ValueSource(doubles = {
+            (PI / 2), (3 * PI) / 2, (PI / 2) + 2 * PI, ((3 * PI) / 2) + (2 * PI),
+            -(PI / 2), -(3 * PI) / 2, -(PI / 2) - 2 * PI, -((3 * PI) / 2) - (2 * PI)
+    })
+    @DisplayName("Test function on null values")
+    void checkPiValues(double x) {
+        assertNull(sec.calculate(x), "Sec in PI/2 and 3PI/2 should return null");
+    }
+
+    @ParameterizedTest(name = "{index}. Test sec({0}) in peaks ")
+    @ValueSource(doubles = {-2 * PI, -PI, 0, PI, 2 * PI})
+    @DisplayName("Test function in values x % PI (peaks)")
+    void checkPeaks(double x) {
+        assertEquals(sec.calculate(x).doubleValue(), 1 / cos(x), 0.00001);
+    }
+
+    @ParameterizedTest(name = "{index}. Test sec({0}) in small function values ")
+    @ValueSource(doubles = {-5 * PI / 4, -3 * PI / 4, -PI / 4, 3 * PI / 4, 5 * PI / 4})
+    @DisplayName("Test function in small function values")
+    void checkSmallFunctionValues(double x) {
+        assertEquals(sec.calculate(x).doubleValue(), 1 / cos(x), 0.00001);
+    }
+
+    @ParameterizedTest(name = "{index}. Test sec({0}) in large function values ")
+    @ValueSource(doubles = {-3 * PI / 2 - 10e-10, -3 * PI / 2 + 10e-10,
+            -PI / 2 - 10e-10, -PI / 2 + 10e-10,
+            PI / 2 - 10e-10, PI / 2 + 10e-10,
+            3 * PI / 2 - 10e-10, 3 * PI / 2 + 10e-10,
+    })
+    @DisplayName("Test function in large function values")
+    void checkLargeFunctionValues(double x) {
+        assertEquals(sec.calculate(x).doubleValue(), 1 / cos(x), 0.00001);
+    }
+
+}

@@ -11,7 +11,7 @@ public class Sec {
         if ((x % (PI / 2) == 0 || x % ((3 * PI) / 2) == 0) && x % PI != 0) return null;
 
         BigDecimal cos = new BigDecimal(0);
-        for (int n = 0; n < 100; n++) {
+        for (int n = 0; n < 50; n++) {
             cos = cos.add(new BigDecimal(-1)
                     .pow(n)
                     .multiply(new BigDecimal(x).pow(2 * n))
