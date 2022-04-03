@@ -1,7 +1,10 @@
 package algorithm;
 
+import java.util.ArrayList;
+
 public interface Tree {
-    void insert(int key, int value);
-    void delete(int key);
-    Double search(int key);
+    void insert(int key);
+    int remove(int key);
+    BPlusTreeNode search(int key);
+    ArrayList<Integer> traverse();
 }
